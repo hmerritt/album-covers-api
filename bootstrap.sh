@@ -19,15 +19,15 @@ npm install -g node-pre-gyp
 npm install
 onfail
 
-echo -e "\n\n* Fetch album-covers"
-cd data/seeds
-git clone https://github.com/hmerritt/album-covers
-onfail
+#echo -e "\n\n* Fetch album-covers"
+#cd data/seeds
+#git clone https://github.com/hmerritt/album-covers
+#onfail
 
 echo -e "\n\n* Generate index and populate database"
 npx knex migrate:up
 npx knex seed:run
-rm -r ./album-covers
+#rm -r ./album-covers
 
 echo -e "\n\n* Remove redundant programs"
 apk del git make gcc g++ python3
