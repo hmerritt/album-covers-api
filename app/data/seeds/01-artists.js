@@ -1,7 +1,6 @@
-const covers = require("../album-covers-index");
+const covers = require(`${__dirname}/../album-covers-index`);
+const index = covers.loadData(`${__dirname}/index/artists.js`);
 
 exports.seed = function (knex) {
-    return knex("artists").insert(
-        covers.artistsIndex(`${__dirname}/album-covers/covers`)
-    );
+    return knex("artists").insert(index);
 };
