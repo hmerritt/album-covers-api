@@ -1,12 +1,16 @@
 const express = require("express");
 const cors = require("cors");
 
-const db = require("../data/dbConfig.js");
+//  API Routers
+const artists_router = require("./resources/artists/artists_router");
+const albums_router = require("./resources/albums/albums_router");
 
 const server = express();
 
 server.use(express.json());
 server.use(cors());
+server.use("/artists", artists_router);
+server.use("/albums", albums_router);
 
 //  Base endpoint
 server.get("/", (req, res) => {
