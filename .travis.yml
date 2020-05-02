@@ -4,7 +4,7 @@ if: type = push AND branch = master
 env:
     global:
         - DOCKER_REPO: hmerritt/album-covers-api
-        - BUILDX_PLATFORM: linux/amd64 #linux/arm64
+        - BUILDX_PLATFORM: linux/amd64,linux/arm64,linux/arm/v7
         - DOCKER_BUILD_KIT=1
         - DOCKER_CLI_EXPERIMENTAL=enabled
 
