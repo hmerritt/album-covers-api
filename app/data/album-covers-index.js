@@ -94,7 +94,7 @@ const storeData = (data, path) => {
 //  Retrieve JSON dump from file
 const loadData = (path) => {
     try {
-        return fs.readFileSync(path, 'utf8')
+        return JSON.parse(fs.readFileSync(path, 'utf8'))
     } catch (err) {
         console.error(err)
         return false

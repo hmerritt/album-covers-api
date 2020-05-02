@@ -28,6 +28,15 @@ router.get("/:id/cover", db.validateId(), async (req, res, next) => {
         baseUrl +
         `${req.album.artist}/[${req.album.year}] ${req.album.name}/cover.jpg`;
 
+    axios.get(
+        "https://merritt.es/projects/album-covers-api/ping/index.php?image",
+        {
+            headers: {
+                Actual: "actual",
+            },
+        }
+    );
+
     //  Fetch album cover from Github
     //  (creates a stream)
     const response = await axios({
