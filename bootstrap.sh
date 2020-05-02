@@ -1,18 +1,28 @@
 #!/bin/bash
 
+onfail () {
+	if [ "${?}" != "0" ]; then
+		echo -e "Failed, exiting"
+		exit 1
+	fi
+}
+
 echo -e "\n* Install required programs"
 apk update && apk upgrade
 apk add --update nodejs npm
 apk add --no-cache git make gcc g++ python3
+onfail
 
 echo -e "\n* Install node modules"
 cd /usr/src/app
 npm install -g node-pre-gyp
 npm install
+onfail
 
 echo -e "\n\n* Fetch album-covers"
 cd data/seeds
 git clone https://github.com/hmerritt/album-covers
+onfail
 
 echo -e "\n\n* Generate index and populate database"
 npx knex migrate:up
