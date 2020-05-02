@@ -48,4 +48,38 @@ function generateCoversIndex(path_to_covers = "../../album-covers/covers") {
     return index;
 }
 
-module.exports = { generateCoversIndex };
+//  Get artist index
+function artistsIndex(path_to_covers = "../../album-covers/covers") {
+    const index = generateCoversIndex(path_to_covers);
+    return index.map((value, index) => {
+        return {
+            id: index + 1,
+            name: value.artist,
+        };
+    });
+}
+
+//  Get album index
+function albumsIndex(path_to_covers = "../../album-covers/covers") {
+    const index = generateCoversIndex(path_to_covers);
+    const albumsIndex = [];
+    let albumsCounter = 1;
+
+    //  Loop artists
+    index.forEach((artist, artist_id) => {
+        //  Loop artist albums
+        artist.albums.forEach((album, i) => {
+            albumsIndex.push({
+                id: albumsCounter,
+                artist_id: artist_id + 1,
+                name: album.name,
+                year: album.year,
+            });
+            albumsCounter++;
+        });
+    });
+
+    return albumsIndex;
+}
+
+module.exports = { generateCoversIndex, artistsIndex, albumsIndex };
