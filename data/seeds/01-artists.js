@@ -1,8 +1,9 @@
+const covers = require("../album-covers-index");
+
 exports.seed = function (knex) {
-    return knex("artists").insert([
-        { id: 1, name: "André Kostelanetz" },
-        { id: 2, name: "Bob Crewe" },
-        { id: 3, name: "Gloria Barnes" },
-        { id: 4, name: "Wayne King" },
-    ]);
+    return knex("artists").insert(
+        covers.artistsIndex(
+            "C:\\Users\\Harry\\Documents\\my\\projects\\computing\\album-covers\\album-covers\\covers"
+        )
+    );
 };
