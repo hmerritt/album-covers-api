@@ -1,6 +1,6 @@
 "use strict";
 
-const { readdirSync } = require("fs");
+const fs = require("fs");
 
 function generateCoversIndex(path_to_covers = "../../album-covers/covers") {
     //  Setup store for index
@@ -8,7 +8,7 @@ function generateCoversIndex(path_to_covers = "../../album-covers/covers") {
 
     //  Get all folder names within a directory
     const getDirectories = (source) =>
-        readdirSync(source, { withFileTypes: true })
+        fs.readdirSync(source, { withFileTypes: true })
             .filter((dirent) => dirent.isDirectory())
             .map((dirent) => dirent.name);
 
@@ -82,4 +82,23 @@ function albumsIndex(path_to_covers = "../../album-covers/covers") {
     return albumsIndex;
 }
 
-module.exports = { generateCoversIndex, artistsIndex, albumsIndex };
+//  JSON dump to file
+const storeData = (data, path) => {
+    try {
+        fs.writeFileSync(path, JSON.stringify(data));
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+//  Retrieve JSON dump from file
+const loadData = (path) => {
+    try {
+        return fs.readFileSync(path, 'utf8')
+    } catch (err) {
+        console.error(err)
+        return false
+    }
+}
+
+module.exports = { generateCoversIndex, artistsIndex, albumsIndex, storeData, loadData };
